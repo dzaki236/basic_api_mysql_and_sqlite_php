@@ -5,9 +5,8 @@ $password = 'passwords';//rubah ini
 $db_name = '';//rubah ini
 $db_table = '';//rubah ini
 $connection = mysqli_connect($host,$username,$password,$db_name);
-
 if(!$connection)
 {
-    echo('mysql_eror');
+    echo 'mysql_eror'.mysqli_connect_error($connection);
 }
 ?>
