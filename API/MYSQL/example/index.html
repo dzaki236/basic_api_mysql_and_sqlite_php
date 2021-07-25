@@ -1,12 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        input {
+            width: 100%;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <table style="width: 100%; border: 1px solid black; border-collapse:collapse;" border="1" cellpadding="10px">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Judul Buku</th>
+                <th>Pengarang</th>
+                <th>Penerbit</th>
+                <th>Tahun Terbit</th>
+            </tr>
+        </thead>
+        <tbody id="loaddata"></tbody>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <div id="form">
+        <table style="width: 80%;">
+            <tr>
+                <td colspan="3" id="errormessagehere"></td>
+            </tr>
+            <tr>
+                <td>Judul buku</td>
+                <td>:</td>
+                <td><input type="text" name="judul_buku"></td>
+            </tr>
+            <tr>
+                <td>Pengarang</td>
+                <td>:</td>
+                <td><input type="text" name="pengarang"></td>
+            </tr>
+            <tr>
+                <td>Penerbit</td>
+                <td>:</td>
+                <td><input type="text" name="penerbit"></td>
+            </tr>
+            <tr>
+                <td>Tahun Terbit</td>
+                <td>:</td>
+                <td><input type="date" name="tahunterbit"></td>
+            </tr>
+            <br>
+            <tr>
+                <td colspan="3"><button onclick="insertdata()" style="width: 100%; margin-top: 10px;">Simpan
+                        data</button></td>
+            </tr>
+        </table>
+    </div>
+    <script src="./jquery.js"></script>
+    <script>
+        onload();
+
+        function insertdata() {
+            var judul_buku = $("[name='judul_buku']").val();
+            var pengarang = $("[name='pengarang']").val();
+            var penerbit = $("[name='penerbit']").val();
+            var tahunterbit = $("[name='tahunterbit']").val();
+            $.ajax({
+                type: "POST",
+                data: "judul_buku=" + judul_buku + "&pengarang=" + pengarang + "&penerbit=" + penerbit +
+                    "&tahunterbit=" + tahunterbit,
+                url: "./create_api.php",
+                success: function (result) {
+                    console.log("judul_buku=" + judul_buku + "&pengarang=" + pengarang + "&penerbit=" + penerbit +
+                    "&tahunterbit=" + tahunterbit);
+                    console.log(result);
+                    var resultObj = JSON.parse(result);
+                    $('#errormessagehere').html(resultObj.message);
+                    onload();
+                }
+            });
+        }
+
+        function onload() {
+            var datahandler = $('#loaddata');
+            datahandler.html("");
+            $.ajax({
+                type: "GET",
+                data: "",
+                url: "./show_api.php",
+                success: function (result) {
+                    var resultObj = JSON.parse(result);
+                    console.log(resultObj);
+                    nomor = 1;
+                    $.each(resultObj, function (key, val) {
+                        var newRow = $("<tr>");
+                        newRow.html("<td>" + nomor++ + "</td>" + "<td>" + val.judul_buku + "</td>" +
+                            "<td>" + val.pengarang + "</td>" + "<td>" + val.penerbit + "</td>" +
+                            "<td>" + val.tahunterbit + "</td>");
+                        datahandler.append(newRow);
+                    });
+                }
+            });
+        }
+    </script>
 </body>
+
 </html>
