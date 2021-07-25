@@ -1,5 +1,5 @@
 # basic_api_mysql_and_sqlite_php
-basic api buat belajar aja,db mysql and sqlite,menggunakan bahasa pemrogramman php
+basic api buat belajar aja,db mysql and sqlite,menggunakan bahasa pemrogramman php,
 **sebenarnya bisa membuat api dengan bahasa pemrogramman apapun,js/phyton dan lainnya, tapi pada repository kali ini saya akan buat di php**
 ## prequisite
 - folder 'template'. 
