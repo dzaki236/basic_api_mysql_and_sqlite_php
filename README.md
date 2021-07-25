@@ -22,3 +22,4 @@ basic api buat belajar aja,db mysql and sqlite,menggunakan bahasa pemrogramman p
 * lalu pilih 'mysql' folder,dan hapus 'sqlite' folder, ***untuk database folder jangan di hapus,karena terdapat sql/db filenya***.
 * buat database pada user mysql mu,lalu import .sqlnya,bisa dengan menggunakan mysql/sql manajemen masing masing
 * buka file koneksi pada file connection.php,lalu rubah 'username','passwords','db_name','table_name' nya sesuai kepemilikan mu,***namun bila password kosong bisa kosongkan saja***.
+# repository ini sedang tahap pengembangan
